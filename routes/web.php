@@ -11,8 +11,21 @@
 |
 */
 
+Route::middleware("guest")->group(function(){
+    Route::get("login", "UserController@loginIndex")->name("login");
+    Route::post("login/validate", "UserController@loginPost")->name("login.post");
+    Route::get("register", "UserController@create");
+    Route::post("register/save", "UserController@store")->name("user.register.post");
+});
 
-Route::get('/create','UserController@create');
-Route::post('/create/save','UserController@store');
-Route::patch('/user/{user}','UserController@update');
-Route::delete('/user/{user}','UserController@destroy');
+
+Route::middleware("auth")->group(function(){
+    Route::get("", "HomeController@index")->name("home");
+    Route::get("profile/{user}", "UserController@profile")->name("profile");
+    Route::get("{user}", "UserController@show")->name("show.user");
+    Route::get("edit/{id}", "UserController@edit")->name("user.edit");
+    Route::patch('{user}','UserController@update')->name("user.edit.post");
+    Route::delete('user/{user}','UserController@destroy')->name("user.delete");
+    Route::get("logout", "UserController@logout")->name("logout");
+});
+

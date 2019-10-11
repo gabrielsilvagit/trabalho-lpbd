@@ -2,77 +2,87 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
     use refreshDatabase;
+
     /** @test */
     public function a_user_can_be_created()
     {
-        $this->withoutExceptionHandling();
-        $response = $this->post('/create/save', $this->data());
+        $user = factory(User::class)->make();
+        $userForm = $this->fillUserForm($user);
+        $response = $this->post(route('user.register.post'), $userForm);
         $user = User::all();
         $this->assertCount(1, User::all());
     }
     /** @test */
     public function a_name_is_required()
     {
-        $user = $this->data();
+        $user = factory(User::class)->make();
         $user['name']="";
-        $response = $this->post('/create', $user);
+        $userForm = $this->fillUserForm($user);
+        $response = $this->post(route('user.register.post'), $userForm);
         $this->assertCount(0, User::all());
     }
     /** @test */
     public function an_email_is_required()
     {
-        $user = $this->data();
+        $user = factory(User::class)->make();
         $user['email']="";
-        $response = $this->post('/create', $user);
+        $userForm = $this->fillUserForm($user);
+        $response = $this->post(route('user.register.post'), $userForm);
         $this->assertCount(0, User::all());
     }
     /** @test */
     public function a_password_is_required()
     {
-        $user = $this->data();
-        $user['password']="";
-        $response = $this->post('/create', $user);
+        $user = factory(User::class)->make();
+        $user['password']= null;
+        $userForm = $this->fillUserForm($user);
+        $response = $this->post(route('user.register.post'), $userForm);
         $this->assertCount(0, User::all());
     }
      /** @test */
-     public function a_user_can_be_updated()
-     {
-         $this->withoutExceptionHandling();
-         $this->post('/create', $this->data());
-         $user = User::first();
-         $response = $this->patch('user/'.$user->id, [
-             'name' => 'teste2',
-             'email' => 'teste2@teste2.com',
-             'password' => '654321'
-         ]);
-         $this->assertEquals('teste2', User::first()->name);
-         $this->assertEquals('teste2@teste2.com', User::first()->email);
-     }
+    public function a_user_can_be_updated()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $user = User::first();
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email
+        ]);
+        $newUserData = factory(User::class)->make();
+        $userData = $this->fillUserForm($newUserData);
+        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $this->assertEquals($userData['name'], User::first()->name);
+        $this->assertEquals($userData['email'], User::first()->email);
+    }
      /** @test */
     public function a_user_can_be_deleted()
     {
-        $this->post('/create', $this->data());
-        $this->assertCount(1, User::all());
+        $user = factory(User::class)->create();
+        Auth::login($user);
         $user = User::first();
-        $response = $this->delete('user/'.$user->id);
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email
+        ]);
+        $response = $this->delete(route('user.delete', $user->id));
         $this->assertCount(0, User::all());
         $response->assertRedirect('/');
     }
 
-    private function data()
+    private function fillUserForm($user)
     {
-        return [
-            'name' => 'teste',
-            'email' => 'teste@teste.com',
-            'password' => '123456'
-        ];
+        $form = [];
+		$form["name"] = $user->name;
+		$form["email"] = $user->email;
+        $form["password"] = $user->password;
+        return $form;
     }
 }
