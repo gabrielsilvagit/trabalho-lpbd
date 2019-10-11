@@ -13,14 +13,19 @@ class UserTest extends TestCase
     public function a_user_can_be_created()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('/create', [
-            'name' => 'teste',
-            'email' => 'teste@teste.com',
-            'password' => '123456'
-        ]);
+        $response = $this->post('/create', $this->data());
 
         $this->assertDatabaseHas('users',[
             'email' => 'teste@teste.com'
         ]);
+    }
+
+    private function data()
+    {
+        return [
+            'name' => 'teste',
+            'email' => 'teste@teste.com',
+            'password' => '123456'
+        ];
     }
 }
