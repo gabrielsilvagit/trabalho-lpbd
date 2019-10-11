@@ -14,11 +14,12 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     public function store(Request $request)
     {
+        dd("teste");
         $user = User::create($this->validateRequest());
         return redirect('/');
     }
@@ -33,14 +34,16 @@ class UserController extends Controller
         //
     }
 
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
-        //
+        $user->update($this->validateRequest());
+        return redirect('/');
     }
 
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/');
     }
 
     protected function validateRequest()

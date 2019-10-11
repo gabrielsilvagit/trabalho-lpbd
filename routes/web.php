@@ -11,4 +11,8 @@
 |
 */
 
-Route::post('/create','UserController@store');
+
+Route::get('/create','UserController@create');
+Route::post('/create/save','UserController@store');
+Route::patch('/user/{user}','UserController@update');
+Route::delete('/user/{user}','UserController@destroy');
