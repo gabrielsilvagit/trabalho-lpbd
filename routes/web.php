@@ -20,12 +20,11 @@ Route::middleware("guest")->group(function(){
 
 
 Route::middleware("auth")->group(function(){
-    Route::get("", "HomeController@index")->name("home");
-    Route::get("profile/{user}", "UserController@profile")->name("profile");
+    Route::get("/", "HomeController@index")->name("home");
     Route::get("{user}", "UserController@show")->name("show.user");
     Route::get("edit/{id}", "UserController@edit")->name("user.edit");
     Route::patch('{user}','UserController@update')->name("user.edit.post");
     Route::delete('user/{user}','UserController@destroy')->name("user.delete");
-    Route::get("logout", "UserController@logout")->name("logout");
+    Route::post("/logout", "UserController@logout")->name("user.logout");
 });
 

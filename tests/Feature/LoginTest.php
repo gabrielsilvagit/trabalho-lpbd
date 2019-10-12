@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -34,6 +35,17 @@ class LoginTest extends TestCase
         $userData["password"] = 'wrong_password';
         $response = $this->post(route('login.post'), $userData);
         $response->assertRedirect('/');
+    }
+
+    /** @test */
+    public function a_user_can_be_logout()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $this->assertAuthenticatedAs($user);
+        Auth::logout();
+        $this->assertGuest();
+        
     }
 
     private function fillUserForm($user)

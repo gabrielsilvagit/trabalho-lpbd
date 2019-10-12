@@ -7,14 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('user.edit.post', Auth::user()->id) }}" method="PATCH">
+    <form action="{{ route('user.edit.post', $user->id) }}" method="post">
         @csrf
+        @method('PATCH')
         <label for="name">Nome:</label>
-        <input type="text" placeholder="Nome" name="name" value="{{ old('name') ?? Auth::user()->name }}">
+        <input type="text" placeholder="Nome" name="name" value="{{ old('name') ?? $user->name }}">
         <label for="email">Email:</label>
-        <input type="email" placeholder="E-mail" name="email" value="{{ old('email') ?? Auth::user()->email }}">
-        <label for="password">Senha:</label>
-        <input type="password" placeholder="Senha" name="password">
+        <input type="email" placeholder="E-mail" name="email" value="{{ old('email') ?? $user->email }}">
         <button type="submit">Salvar</button>
     </form>
 </body>

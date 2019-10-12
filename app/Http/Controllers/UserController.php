@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -30,29 +30,30 @@ class UserController extends Controller
             $user->fill($data);
             $user->save();
             DB::commit();
+            return redirect()->route("login");
         } catch(Exception $e) {
             Log::debug($e);
             DB::rollBack();
+            return redirect()->back();
         }
-
-        return redirect()->route("login");
     }
 
     public function show(User $user)
     {
-        // return redirect('/user/',compact($user));
+        $user = Auth::user();
+        return view('user.show', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit()
     {
-        return view('user.edit');
+        $user = Auth::user();
+        return view('user.edit', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
         DB::beginTransaction();
         try {
-            dd($request);
             $data = $this->validateRequest($request);
             $data['name'] = $request->name;
             $data['email'] = $request->email;
@@ -87,10 +88,10 @@ class UserController extends Controller
         }
         return redirect('/');
     }
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
     protected function validateRequest($request)
@@ -98,7 +99,7 @@ class UserController extends Controller
         return $request->validate([
             'name' => 'sometimes|required',
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'sometimes|required',
         ]);
     }
 }
