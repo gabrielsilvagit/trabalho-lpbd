@@ -11,9 +11,17 @@
     <input type="text" placeholder="Nome" name="name" value="{{ old('name') ?? $user->name }}" disabled>
     <label for="email">Email:</label>
     <input type="email" placeholder="E-mail" name="email" value="{{ old('email') ?? $user->email }}" disabled>
+    <form action="{{ route('user.edit', $user) }}" method="get">
+    @csrf
+    <button type="submit">Editar</button>
+    </form>
     <form action="{{ route('user.logout') }}" method="post">
     @csrf
     <button type="submit">Sair</button>
+    </form>
+    <form action="{{ route('service.create') }}" method="get">
+    @csrf
+    <button type="submit">Criar Serviço</button>
     </form>
 </body>
 </html>

@@ -21,10 +21,16 @@ Route::middleware("guest")->group(function(){
 
 Route::middleware("auth")->group(function(){
     Route::get("/", "HomeController@index")->name("home");
-    Route::get("{user}", "UserController@show")->name("show.user");
-    Route::get("edit/{id}", "UserController@edit")->name("user.edit");
-    Route::patch('{user}','UserController@update')->name("user.edit.post");
+    Route::get("user/{user}", "UserController@show")->name("show.user");
+    Route::get("/user/edit/{user}", "UserController@edit")->name("user.edit");
+    Route::patch('user/{user}','UserController@update')->name("user.edit.post");
     Route::delete('user/{user}','UserController@destroy')->name("user.delete");
     Route::post("/logout", "UserController@logout")->name("user.logout");
+
+    Route::get("service", "ServiceController@create")->name("service.create");
+    Route::post("service/save", "ServiceController@store")->name("service.store");
+    Route::get("service/{service}", "ServiceController@show")->name("service.show");
+    Route::get("service/edit/{service", "ServiceController@edit")->name("service.edit");
+    Route::patch("service/{service}", "ServiceController@update")->name("service.update");
 });
 

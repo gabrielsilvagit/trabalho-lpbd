@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('user.edit.post', $user->id) }}" method="post">
+    <form action="{{ route('user.edit.post', $user) }}" method="post">
         @csrf
         @method('PATCH')
         <label for="name">Nome:</label>

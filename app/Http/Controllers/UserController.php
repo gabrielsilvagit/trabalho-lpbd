@@ -44,9 +44,8 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        $user = Auth::user();
         return view('user.edit', compact('user'));
     }
 
@@ -73,7 +72,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/');
+        return redirect(route('login'));
     }
 
     public function loginIndex()
