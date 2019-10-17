@@ -34,7 +34,7 @@ class UserController extends Controller
         } catch(Exception $e) {
             Log::debug($e);
             DB::rollBack();
-            return redirect()->back();
+            return redirect()->route("user.register.create");
         }
     }
 

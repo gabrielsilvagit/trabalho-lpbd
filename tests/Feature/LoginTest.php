@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
 {
+    use RefreshDatabase;
     /** @test */
     public function a_user_can_be_log_in_with_correct_credential()
     {
@@ -43,9 +44,8 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
         Auth::login($user);
         $this->assertAuthenticatedAs($user);
-        Auth::logout();
+        $response = $this->post(route('user.logout'));
         $this->assertGuest();
-        
     }
 
     private function fillUserForm($user)

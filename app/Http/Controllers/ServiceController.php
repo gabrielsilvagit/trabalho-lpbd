@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Hiring;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -71,7 +72,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit',compact('service'));
     }
 
     /**
@@ -83,7 +84,20 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $data = $this->validateRequest($request);
+            $data['title'] = $request->title;
+            $data['description'] = $request->description;
+            $data['price'] = $request->price;
+            $service->fill($data);
+            $service->save();
+            DB::commit();
+        } catch(Exception $e) {
+            Log::debug($e);
+            DB::rollBack();
+        }
+        return redirect(route('service.show', $service));
     }
 
     /**
@@ -97,13 +111,20 @@ class ServiceController extends Controller
         //
     }
 
+    public function hire(Service $service, Request $request)
+    {
+        $user = Auth::user();
+        $service->user->attach($user);
+
+    }
+
     protected function validateRequest($request)
     {
         return $request->validate([
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'user_id' => 'required',
+            'user_id' => 'sometimes|required',
         ]);
     }
 }

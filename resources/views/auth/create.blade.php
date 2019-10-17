@@ -17,5 +17,6 @@
         <input type="password" placeholder="Senha" name="password">
         <button type="submit">Salvar</button>
     </form>
+    <a href="{{ route('login') }}">Já tem uma conta? Clique Aqui</a>
 </body>
 </html>

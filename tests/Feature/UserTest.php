@@ -20,6 +20,7 @@ class UserTest extends TestCase
         $response = $this->post(route('user.register.post'), $userForm);
         $user = User::all();
         $this->assertCount(1, User::all());
+        $response->assertRedirect(route('login'));
     }
     /** @test */
     public function a_name_is_required()
@@ -74,7 +75,7 @@ class UserTest extends TestCase
         ]);
         $response = $this->delete(route('user.delete', $user->id));
         $this->assertCount(0, User::all());
-        $response->assertRedirect('/');
+        $response->assertRedirect('/login');
     }
 
     private function fillUserForm($user)

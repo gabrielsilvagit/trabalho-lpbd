@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    <label for="provider">Prestador:</label>
+    <a href="{{ route('show.user', $service->user ) }}"><input type="text" placeholder="Prestador" name="provider" value="{{ old('title') ?? $service->user->name }}" disabled></a>
     <label for="title">Titulo:</label>
     <input type="text" placeholder="Titulo" name="title" value="{{ old('title') ?? $service->title }}" disabled>
     <label for="description">Descrição:</label>
@@ -17,6 +19,10 @@
     <form action="{{ route('service.edit', $service) }}" method="get">
     @csrf
     <button type="submit">Editar</button>
+    </form>
+    {{-- <form action="{{ route('service.hire', $service) }}" method="get"> --}}
+    @csrf
+    <button type="submit">Contratar</button>
     </form>
 </body>
 </html>

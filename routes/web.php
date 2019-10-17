@@ -14,7 +14,7 @@
 Route::middleware("guest")->group(function(){
     Route::get("login", "UserController@loginIndex")->name("login");
     Route::post("login/validate", "UserController@loginPost")->name("login.post");
-    Route::get("register", "UserController@create");
+    Route::get("register", "UserController@create")->name("user.register.create");
     Route::post("register/save", "UserController@store")->name("user.register.post");
 });
 
@@ -30,7 +30,9 @@ Route::middleware("auth")->group(function(){
     Route::get("service", "ServiceController@create")->name("service.create");
     Route::post("service/save", "ServiceController@store")->name("service.store");
     Route::get("service/{service}", "ServiceController@show")->name("service.show");
-    Route::get("service/edit/{service", "ServiceController@edit")->name("service.edit");
+    Route::get("service/edit/{service}", "ServiceController@edit")->name("service.edit");
     Route::patch("service/{service}", "ServiceController@update")->name("service.update");
+
+    Route::post("service/{service}/hire", "ServiceController@hire")->name("service.hire");
 });
 

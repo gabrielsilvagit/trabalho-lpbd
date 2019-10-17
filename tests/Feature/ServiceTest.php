@@ -12,9 +12,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ServiceTest extends TestCase
 {
     use	RefreshDatabase;
-    
+
     protected $loggedUser;
-    
+
 	// public function setUp()
 	// {
     //     parent::setUp();
@@ -94,14 +94,12 @@ class ServiceTest extends TestCase
         ]);
 
         $service = Service::first();
-
         $newServiceData = [
             'title' => 'Carreta',
             'description' => 'Faço carretas em geral',
             'price' => 'R$ 200,00 por dia',
         ];
-
-        $response = $this->post(route('service.update', $service->id), $newServiceData);
+        $response = $this->patch(route('service.update', $service), $newServiceData);
         $this->assertCount(1, Service::all());
         $this->assertDatabaseHas('services', [
             'title' => 'Carreta',
