@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -41,7 +42,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = Auth::user();
-        return view('user.show', compact('user'));
+        $services = Service::all();
+        return view('user.show', compact('user','services'));
     }
 
     public function edit(User $user)

@@ -40,6 +40,7 @@ class ServiceController extends Controller
     {
         $request['user_id'] = Auth::user()->id;
         $data = $this->validateRequest($request);
+        // dd($data);
         DB::beginTransaction();
         try {
             $service->fill($data);
@@ -111,11 +112,12 @@ class ServiceController extends Controller
         //
     }
 
-    public function hire(Service $service, Request $request)
+    public function hire(Request $request, Service $service)
     {
         $user = Auth::user();
-        $service->user->attach($user);
-
+        // dd($user, $service);
+        $service->user()->attach($user);
+        return redirect(route('service.show', $service));
     }
 
     protected function validateRequest($request)

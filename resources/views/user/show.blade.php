@@ -23,5 +23,16 @@
     @csrf
     <button type="submit">Criar Serviço</button>
     </form>
+    <h1>Serviços</h1>
+    @foreach ($services as $service)
+        @if( $service->user_id == $user->id )
+        <tr>
+            <th><a href="{{ route('service.show', $service) }}">{{ $service->title }}</a></th>
+            <th>{{ $service->description }}</th>
+            <th>{{ $service->price }}</th>
+        </tr>
+        @endif
+    @endforeach
+
 </body>
 </html>

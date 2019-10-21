@@ -1,3 +1,27 @@
+Example (Tests\Unit\Example)
+ [x] Basic test
+
 Hiring (Tests\Feature\Hiring)
- [ ] A user can hire a service
+ [x] A user can hire a service
+
+Login (Tests\Feature\Login)
+ [x] A user can be log in with correct credential
+ [x] A user cant be log in with incorrect email
+ [x] A user cant be log in with incorrect password
+ [x] A user can be logout
+
+Service (Tests\Feature\Service)
+ [x] A user can create a service
+ [x] A user cannot create a service without title
+ [x] A user cannot create a service without description
+ [x] A user cannot create a service without price
+ [x] A service can be updated
+
+User (Tests\Feature\User)
+ [x] A user can be created
+ [x] A name is required
+ [x] An email is required
+ [x] A password is required
+ [x] A user can be updated
+ [x] A user can be deleted
 

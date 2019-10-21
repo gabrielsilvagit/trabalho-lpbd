@@ -8,7 +8,7 @@
 </head>
 <body>
     <label for="provider">Prestador:</label>
-    <a href="{{ route('show.user', $service->user ) }}"><input type="text" placeholder="Prestador" name="provider" value="{{ old('title') ?? $service->user->name }}" disabled></a>
+    <a href="{{ route('show.user', $service->owner ) }}"><input type="text" placeholder="Prestador" name="provider" value="{{ old('title') ?? $service->owner->name}}" disabled></a>
     <label for="title">Titulo:</label>
     <input type="text" placeholder="Titulo" name="title" value="{{ old('title') ?? $service->title }}" disabled>
     <label for="description">Descrição:</label>
@@ -20,9 +20,14 @@
     @csrf
     <button type="submit">Editar</button>
     </form>
-    {{-- <form action="{{ route('service.hire', $service) }}" method="get"> --}}
+    <form action="{{ route('service.hire', $service) }}" method="post">
     @csrf
     <button type="submit">Contratar</button>
     </form>
+
+    <h1>Clientes:</h1>
+    @foreach ($service->user as $service)
+        <h3>{{$service->name}}</h3>
+    @endforeach
 </body>
 </html>

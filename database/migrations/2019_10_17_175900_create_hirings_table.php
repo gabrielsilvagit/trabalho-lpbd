@@ -19,8 +19,8 @@ class CreateHiringsTable extends Migration
             $table->string('user_id');
             $table->timestamps();
 
-            $table->foreign('service_id')->references('id')->on('service');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

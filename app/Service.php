@@ -10,6 +10,11 @@ class Service extends Model
         'title', 'description','price' , 'user_id',
     ];
 
+    public function owner()
+    {
+        return $this->hasOne("App\User", "id", "user_id");
+    }
+
     public function user()
     {
         return $this->belongsToMany('App\User');
