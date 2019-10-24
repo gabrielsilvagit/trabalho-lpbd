@@ -27,6 +27,7 @@ Route::middleware("auth")->group(function(){
     Route::delete('user/{user}','UserController@destroy')->name("user.delete");
     Route::post("/logout", "UserController@logout")->name("user.logout");
 
+    Route::get("services", "ServiceController@index")->name("service.index");
     Route::get("service", "ServiceController@create")->name("service.create");
     Route::post("service/save", "ServiceController@store")->name("service.store");
     Route::get("service/{service}", "ServiceController@show")->name("service.show");
