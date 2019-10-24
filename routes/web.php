@@ -21,6 +21,7 @@ Route::middleware("guest")->group(function(){
 
 Route::middleware("auth")->group(function(){
     Route::get("/", "HomeController@index")->name("home");
+    Route::get("users", "UserController@index")->name("user.index");
     Route::get("user/{user}", "UserController@show")->name("show.user");
     Route::get("/user/edit/{user}", "UserController@edit")->name("user.edit");
     Route::patch('user/{user}','UserController@update')->name("user.edit.post");
@@ -33,7 +34,9 @@ Route::middleware("auth")->group(function(){
     Route::get("service/{service}", "ServiceController@show")->name("service.show");
     Route::get("service/edit/{service}", "ServiceController@edit")->name("service.edit");
     Route::patch("service/{service}", "ServiceController@update")->name("service.update");
+    Route::delete("service/{service}", "ServiceController@destroy")->name("service.delete");
 
     Route::post("service/{service}/hire", "ServiceController@hire")->name("service.hire");
+    Route::post("service/{service}/cancel", "ServiceController@cancel")->name("service.cancel");
 });
 

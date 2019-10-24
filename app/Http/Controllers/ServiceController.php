@@ -39,18 +39,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request, Service $service)
     {
-        $request['user_id'] = Auth::user()->id;
-        $data = $this->validateRequest($request);
-        // dd($data);
-        DB::beginTransaction();
         try {
-            $service->fill($data);
-            $service->save();
-            DB::commit();
+            $request['user_id'] = Auth::user()->id;
+            $data = $this->validateRequest($request);
+            $service->create($data);
             return redirect()->route("service.show", $service);
         } catch(Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
             return redirect()->back();
         }
     }
@@ -86,20 +80,13 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        DB::beginTransaction();
         try {
             $data = $this->validateRequest($request);
-            $data['title'] = $request->title;
-            $data['description'] = $request->description;
-            $data['price'] = $request->price;
-            $service->fill($data);
-            $service->save();
-            DB::commit();
+            $service->update($data);
+            return redirect()->route("service.show", $service);
         } catch(Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
+            return view('services.edit',compact('service'));
         }
-        return redirect(route('service.show', $service));
     }
 
     /**
@@ -110,7 +97,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        return redirect(route('show.user', $service->owner));
     }
 
     public function hire(Request $request, Service $service)
@@ -118,6 +106,13 @@ class ServiceController extends Controller
         $user = Auth::user();
         // dd($user, $service);
         $service->user()->attach($user);
+        return redirect(route('service.show', $service));
+    }
+    public function cancel(Request $request, Service $service)
+    {
+        $user = Auth::user();
+        // dd($user, $service);
+        $service->user()->detach($user);
         return redirect(route('service.show', $service));
     }
 

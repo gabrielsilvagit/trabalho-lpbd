@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    @include('layouts.menu')
     <form action="{{ route('service.store') }}" method="post">
         @csrf
         <label for="title">Titulo:</label>

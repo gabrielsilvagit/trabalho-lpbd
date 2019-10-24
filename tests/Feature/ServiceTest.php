@@ -107,4 +107,31 @@ class ServiceTest extends TestCase
             'price' => 'R$ 200,00 por dia',
         ]);
     }
+    /** @test */
+    public function a_service_can_be_deleted()
+    {
+        $this->loggedUser = factory(User::class)->create();
+        Auth::login($this->loggedUser);
+        $serviceData = [
+            'title' => 'Pintura',
+            'description' => 'Faço pinturas em geral',
+            'price' => 'R$ 150,00 por dia',
+        ];
+        $response = $this->post(route('service.store'), $serviceData);
+        $this->assertCount(1, Service::all());
+        $service = Service::first();
+        $response = $this->delete(route('service.delete', $service));
+        $this->assertCount(0, Service::all());
+        $response->assertRedirect(route('show.user', $service->owner));
+    }
+
+    private function fillServiceForm($service)
+    {
+        $form = [];
+		$form["title"] = $service->title;
+		$form["description"] = $service->description;
+        $form["price"] = $service->price;
+        $form["user_id"] = $service->owner;
+        return $form;
+    }
 }

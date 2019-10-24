@@ -59,10 +59,50 @@ class UserTest extends TestCase
             'email' => $user->email
         ]);
         $newUserData = factory(User::class)->make();
-        $userData = $this->fillUserForm($newUserData);
+        $userData = [
+            'name' => $newUserData->name,
+            'email' => $newUserData->email,
+        ];
         $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $response->assertRedirect(route('show.user', $user));
         $this->assertEquals($userData['name'], User::first()->name);
         $this->assertEquals($userData['email'], User::first()->email);
+    }
+    /** @test */
+    public function a_user_cannot_be_updated_with_invalid_name()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $user = User::first();
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email
+        ]);
+        $newUserData = factory(User::class)->make();
+        $userData = [
+            'name' => '',
+            'email' => $newUserData->email,
+        ];
+        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $this->assertEquals($user['name'], User::first()->name);
+        $this->assertEquals($user['email'], User::first()->email);
+    }
+        /** @test */
+    public function a_user_cannot_be_updated_with_invalid_email()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $user = User::first();
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email
+        ]);
+        $newUserData = factory(User::class)->make();
+        $userData = [
+            'name' => $newUserData->name,
+            'email' => '',
+        ];
+        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $this->assertEquals($user['name'], User::first()->name);
+        $this->assertEquals($user['email'], User::first()->email);
     }
      /** @test */
     public function a_user_can_be_deleted()

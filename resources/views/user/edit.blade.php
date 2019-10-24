@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    @include('layouts.menu')
     <form action="{{ route('user.edit.post', $user) }}" method="post">
         @csrf
         @method('PATCH')

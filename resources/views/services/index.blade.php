@@ -7,12 +7,14 @@
     <title>Document</title>
 </head>
 <body>
+@include('layouts.menu')
     <div>
     <tr>
         <td>Prestador</td>
         <td>Titulo</td>
         <td>Descrição</td>
         <td>Preço</td>
+        <td>Visitar serviço</td>
     </tr>
     </div>
     <div>
@@ -22,6 +24,7 @@
             <td>{{ $service->title }}</td>
             <td>{{ $service->description }}</td>
             <td>{{ $service->price }}</td>
+            <td><a href="{{ route('service.show', $service) }}">Serviço</a></td>
         </tr>
     @endforeach
     </div>

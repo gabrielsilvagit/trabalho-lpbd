@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        //
+        $users = User::all();
+        return view('user.index', compact('users'));
     }
 
     public function create()
@@ -25,23 +26,16 @@ class UserController extends Controller
     {
         $data = $this->validateRequest($request);
         $data["password"] = Hash::make($request->password);
-
-        DB::beginTransaction();
         try {
-            $user->fill($data);
-            $user->save();
-            DB::commit();
+            $user = User::create($data);
             return redirect()->route("login");
         } catch(Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
             return redirect()->route("user.register.create");
         }
     }
 
     public function show(User $user)
     {
-        $user = Auth::user();
         $services = Service::all();
         return view('user.show', compact('user','services'));
     }
@@ -53,22 +47,13 @@ class UserController extends Controller
 
     public function update(User $user, Request $request)
     {
-        DB::beginTransaction();
         try {
             $data = $this->validateRequest($request);
-            $data['name'] = $request->name;
-            $data['email'] = $request->email;
-            if (!empty($request->password)) {
-                $data['password'] = Hash::make($request->password);
-            }
-            $user->fill($data);
-            $user->save();
-            DB::commit();
+            $user->update($data);
+            return redirect(route('show.user', $user));
         } catch(Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
+            return redirect(route('user.edit', $user));
         }
-        return redirect(route('user.edit.post', $user->id));
     }
 
     public function destroy(User $user)

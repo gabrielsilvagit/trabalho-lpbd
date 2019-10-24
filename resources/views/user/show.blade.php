@@ -7,22 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+    @include('layouts.menu')
     <label for="name">Nome:</label>
     <input type="text" placeholder="Nome" name="name" value="{{ old('name') ?? $user->name }}" disabled>
     <label for="email">Email:</label>
     <input type="email" placeholder="E-mail" name="email" value="{{ old('email') ?? $user->email }}" disabled>
+    @if(Auth::user() == $user)
     <form action="{{ route('user.edit', $user) }}" method="get">
     @csrf
     <button type="submit">Editar</button>
-    </form>
-    <form action="{{ route('user.logout') }}" method="post">
-    @csrf
-    <button type="submit">Sair</button>
     </form>
     <form action="{{ route('service.create') }}" method="get">
     @csrf
     <button type="submit">Criar Serviço</button>
     </form>
+    @endif
     <h1>Serviços</h1>
     @foreach ($services as $service)
         @if( $service->user_id == $user->id )
