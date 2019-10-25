@@ -110,9 +110,8 @@ class ServiceController extends Controller
     }
     public function cancel(Request $request, Service $service)
     {
-        $user = Auth::user();
-        // dd($user, $service);
-        $service->user()->detach($user);
+        $id = $request->user;
+        $service->user()->detach($id);
         return redirect(route('service.show', $service));
     }
 

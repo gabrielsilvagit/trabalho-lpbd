@@ -24,9 +24,10 @@
     </form>
     @endif
     @if ( Auth::user() != $service->owner)
-    @if( App\Service::find(Auth::user()->id) )
+    @if( $service->user->contains(Auth::user()) )
     <form action="{{ route('service.cancel', $service) }}" method="post">
     @csrf
+    <input name="user" type="hidden" value="{{ Auth::user()->id }}">
     <button type="submit">Cancelar</button>
     </form>
     @else
@@ -37,8 +38,19 @@
     @endif
     @endif
     <h1>Clientes:</h1>
-    @foreach ($service->user as $service)
-        <h3>{{$service->name}}</h3>
+    @foreach ($service->user as $user)
+    <tr>
+        <td>
+        <h3>{{$user->name}}</h3>
+        @if(Auth::user() == $service->owner)
+        <form action="{{ route('service.cancel', $service) }}" method="post">
+        @csrf
+        <input name="user" type="hidden" value="{{ $user->id }}">
+        <button type="submit">Cancelar</button>
+        </form>
+        @endif
+        </td>
+    </tr>
     @endforeach
 </body>
 </html>
