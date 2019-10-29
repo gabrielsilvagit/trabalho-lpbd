@@ -12,6 +12,10 @@
         .nav-item {
             padding: 20px;
         }
+        .dropdown {
+            position: absolute;
+            margin-left: 300px;
+        }
     </style>
 </head>
 <body>

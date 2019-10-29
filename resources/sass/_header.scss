@@ -1,0 +1,44 @@
+$headerh: 60px;
+
+header {
+    position: relative;
+    height: $headerh;
+
+    nav {
+        height: 100%;
+
+        ul {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+
+            li {
+                list-style: none;
+
+                a{
+                    display: flex;
+                    color: #222;
+                    padding: 0 10px ;
+
+                    &:hover {
+                        text-decoration: none;
+                        color: #69f;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    height: $headerh;
+    align-items: center;
+    margin-right: 20px;
+}
