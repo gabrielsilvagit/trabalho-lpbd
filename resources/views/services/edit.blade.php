@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @include('layouts.menu')
+@extends("layouts.main")
+
+@section("content")
+
     <form action="{{ route('service.update', $service) }}" method="post">
         @csrf
         @method('PATCH')
@@ -24,5 +18,4 @@
     @method('DELETE')
     <button type="submit">Excluir</button>
     </form>
-</body>
-</html>
+@endsection

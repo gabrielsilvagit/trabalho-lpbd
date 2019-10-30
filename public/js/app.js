@@ -19235,8 +19235,6 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-alert("estou no app.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

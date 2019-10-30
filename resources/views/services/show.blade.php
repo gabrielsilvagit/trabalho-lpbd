@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @include('layouts.menu')
+@extends("layouts.main")
+
+@section("content")
+@include('layouts.menu')
+
     <label for="provider">Prestador:</label>
     <a href="{{ route('show.user', $service->owner ) }}"><input type="text" placeholder="Prestador" name="provider" value="{{ old('title') ?? $service->owner->name}}" disabled></a>
     <label for="title">Titulo:</label>
@@ -25,9 +20,8 @@
     @endif
     @if ( Auth::user() != $service->owner)
     @if( $service->user->contains(Auth::user()) )
-    <form action="{{ route('service.cancel', $service) }}" method="post">
+    <form action="{{ route('service.cancel', [$service, Auth::user()]) }}" method="post">
     @csrf
-    <input name="user" type="hidden" value="{{ Auth::user()->id }}">
     <button type="submit">Cancelar</button>
     </form>
     @else
@@ -43,14 +37,12 @@
         <td>
         <h3>{{$user->name}}</h3>
         @if(Auth::user() == $service->owner)
-        <form action="{{ route('service.cancel', $service) }}" method="post">
+        <form action="{{ route('service.cancel', [$service, $user]) }}" method="post">
         @csrf
-        <input name="user" type="hidden" value="{{ $user->id }}">
         <button type="submit">Cancelar</button>
         </form>
         @endif
         </td>
     </tr>
     @endforeach
-</body>
-</html>
+@endsection

@@ -34,6 +34,10 @@ header nav ul li a:hover {
   color: #69f;
 }
 
+header nav ul li .dropdown {
+  background-color: red;
+}
+
 .logout {
   position: absolute;
   top: 0;

@@ -37,7 +37,7 @@ Route::middleware("auth")->group(function(){
     Route::delete("service/{service}", "ServiceController@destroy")->name("service.delete");
 
     Route::post("service/{service}/hire", "ServiceController@hire")->name("service.hire");
-    Route::post("service/{service}/cancel", "ServiceController@cancel")->name("service.cancel");
+    Route::post("service/{service}/cancel/{user}", "ServiceController@cancel")->name("service.cancel");
 
     Route::get("/layout", function(){
         return view("old");

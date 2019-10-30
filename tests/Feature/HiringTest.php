@@ -35,7 +35,7 @@ class HiringTest extends TestCase
             'service_id' => $service->id,
             'user_id' => $user->id,
         ]);
-        $response = $this->post(route('service.cancel', $service));
+        $response = $this->post(route('service.cancel', [$service, $user]));
         $this->assertDatabaseMissing('service_user',[
             'service_id' => $service->id,
             'user_id' => $user->id,

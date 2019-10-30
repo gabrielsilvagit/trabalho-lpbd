@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Hiring;
 use App\Service;
 use Illuminate\Http\Request;
@@ -104,14 +105,12 @@ class ServiceController extends Controller
     public function hire(Request $request, Service $service)
     {
         $user = Auth::user();
-        // dd($user, $service);
         $service->user()->attach($user);
         return redirect(route('service.show', $service));
     }
-    public function cancel(Request $request, Service $service)
+    public function cancel(Service $service, User $user)
     {
-        $id = $request->user;
-        $service->user()->detach($id);
+        $service->user()->detach($user);
         return redirect(route('service.show', $service));
     }
 
