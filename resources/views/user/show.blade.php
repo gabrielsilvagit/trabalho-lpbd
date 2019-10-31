@@ -37,7 +37,7 @@
                 <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary">Voltar</a>
                 @if( Auth::user() == $user)
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-info">Adicionar Serviço</a>
+                <a href="{{ route('service.create', $user) }}" class="btn btn-sm btn-info">Adicionar Serviço</a>
                 @endif
             </div>
         </div>

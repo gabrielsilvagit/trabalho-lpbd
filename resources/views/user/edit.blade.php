@@ -1,5 +1,6 @@
 @extends("layouts.main")
 
+@section("page-title", "Editar:" Auth::user()->name )
 
 @section("content")
     <form action="{{ route('user.update', $user) }}" method="post">

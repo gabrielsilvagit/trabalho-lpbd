@@ -42,7 +42,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="staticEmail" >Prestador</label>
-                        <input type="text" class="form-control" name="owner" value={{ $service->owner->name }} read only">
+                        <input disabled type="text" class="form-control" name="owner" value={{ $service->owner->name }}>
                         @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

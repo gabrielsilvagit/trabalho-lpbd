@@ -82,7 +82,7 @@ class UserTest extends TestCase
             'name' => '',
             'email' => $newUserData->email,
         ];
-        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $response = $this->patch(route('user.update', $user->id),$userData);
         $this->assertEquals($user['name'], User::first()->name);
         $this->assertEquals($user['email'], User::first()->email);
     }
@@ -100,7 +100,7 @@ class UserTest extends TestCase
             'name' => $newUserData->name,
             'email' => '',
         ];
-        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $response = $this->patch(route('user.update', $user->id),$userData);
         $this->assertEquals($user['name'], User::first()->name);
         $this->assertEquals($user['email'], User::first()->email);
     }
