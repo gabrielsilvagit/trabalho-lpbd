@@ -63,7 +63,7 @@ class UserTest extends TestCase
             'name' => $newUserData->name,
             'email' => $newUserData->email,
         ];
-        $response = $this->patch(route('user.edit.post', $user->id),$userData);
+        $response = $this->patch(route('', $user->id),$userData);
         $response->assertRedirect(route('show.user', $user));
         $this->assertEquals($userData['name'], User::first()->name);
         $this->assertEquals($userData['email'], User::first()->email);

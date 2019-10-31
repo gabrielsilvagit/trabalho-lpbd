@@ -2,7 +2,7 @@
 
 
 @section("content")
-    <form action="{{ route('user.edit.post', $user) }}" method="post">
+    <form action="{{ route('user.update', $user) }}" method="post">
         @csrf
         @method('PATCH')
         <label for="name">Nome:</label>

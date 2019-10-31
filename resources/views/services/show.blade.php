@@ -42,7 +42,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="staticEmail" >Prestador</label>
-                        <input type="text" class="form-control" name="owner" value="{{ old("owner", $service->owner->name) }}">
+                        <input type="text" class="form-control" name="owner" value={{ $service->owner->name }} read only">
                         @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -55,7 +55,6 @@
                 <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary">Voltar</a>
                 @if( Auth::user() == $service->owner)
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                <a href="{{ route('service.create') }}" class="btn btn-sm btn-info">Adicionar Serviço</a>
                 @endif
             </div>
         </div>
@@ -66,12 +65,12 @@
     @if( $service->user->contains(Auth::user()) )
     <form action="{{ route('service.cancel', [$service, Auth::user()]) }}" method="post">
     @csrf
-    <button type="submit">Cancelar</button>
+    <button class="btn btn-danger" type="submit">Cancelar</button>
     </form>
     @else
     <form action="{{ route('service.hire', $service) }}" method="post">
     @csrf
-    <button type="submit">Contratar</button>
+    <button class="btn btn-primary" type="submit">Contratar</button>
     </form>
     @endif
     @endif
@@ -83,7 +82,7 @@
         @if(Auth::user() == $service->owner)
         <form action="{{ route('service.cancel', [$service, $user]) }}" method="post">
         @csrf
-        <button type="submit">Cancelar</button>
+        <button class="btn btn-danger" type="submit">Cancelar</button>
         </form>
         @endif
         </td>
