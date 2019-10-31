@@ -1,23 +1,67 @@
 @extends("layouts.main")
 
+@section("page-title", $service->title )
+
 @section("content")
-@include('layouts.menu')
 
-    <label for="provider">Prestador:</label>
-    <a href="{{ route('show.user', $service->owner ) }}"><input type="text" placeholder="Prestador" name="provider" value="{{ old('title') ?? $service->owner->name}}" disabled></a>
-    <label for="title">Titulo:</label>
-    <input type="text" placeholder="Titulo" name="title" value="{{ old('title') ?? $service->title }}" disabled>
-    <label for="description">Descrição:</label>
-    <input type="text" placeholder="Descrição" name="description" value="{{ old('description') ?? $service->description }}" disabled>
-    <label for="price">Preço:</label>
-    <input type="text" placeholder="Preço" name="price" value="{{ old('price') ?? $service->price }}" disabled>
 
-    @if ( Auth::user() == $service->owner)
-    <form action="{{ route('service.edit', $service) }}" method="get">
-    @csrf
-    <button type="submit">Editar</button>
+<form action="{{ route('service.update', $service) }}" method="POST">
+
+        @csrf
+        @method("put")
+
+        <fieldset {{ Auth::user() == $service->owner ? "" : "disabled=disabled" }}>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="staticEmail">Titulo</label>
+                        <input type="text" class="form-control" name="title" value="{{ old("title", $service->title) }}">
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="staticEmail" >Email</label>
+                        <input type="text" class="form-control" name="description" value="{{ old("description", $service->description) }}">
+                        @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="staticEmail" >Preco</label>
+                        <input type="text" class="form-control" name="price" value="{{ old("price", $service->price) }}">
+                        @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="staticEmail" >Prestador</label>
+                        <input type="text" class="form-control" name="owner" value="{{ old("owner", $service->owner->name) }}">
+                        @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-12 text-right">
+                <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary">Voltar</a>
+                @if( Auth::user() == $service->owner)
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a href="{{ route('service.create') }}" class="btn btn-sm btn-info">Adicionar Serviço</a>
+                @endif
+            </div>
+        </div>
     </form>
-    @endif
+
+
     @if ( Auth::user() != $service->owner)
     @if( $service->user->contains(Auth::user()) )
     <form action="{{ route('service.cancel', [$service, Auth::user()]) }}" method="post">

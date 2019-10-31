@@ -22,22 +22,22 @@ Route::middleware("guest")->group(function(){
 Route::middleware("auth")->group(function(){
     Route::get("/", "HomeController@index")->name("home");
     Route::get("users", "UserController@index")->name("user.index");
-    Route::get("user/{user}", "UserController@show")->name("show.user");
-    Route::get("/user/edit/{user}", "UserController@edit")->name("user.edit");
-    Route::patch('user/{user}','UserController@update')->name("user.edit.post");
-    Route::delete('user/{user}','UserController@destroy')->name("user.delete");
+    Route::get("users/{user}", "UserController@show")->name("show.user");
+    Route::get("/users/edit/{user}", "UserController@edit")->name("user.edit");
+    Route::put('users/{user}','UserController@update')->name("user.update");
+    Route::delete('users/{user}','UserController@destroy')->name("user.delete");
     Route::post("/logout", "UserController@logout")->name("user.logout");
 
     Route::get("services", "ServiceController@index")->name("service.index");
-    Route::get("service", "ServiceController@create")->name("service.create");
-    Route::post("service/save", "ServiceController@store")->name("service.store");
-    Route::get("service/{service}", "ServiceController@show")->name("service.show");
-    Route::get("service/edit/{service}", "ServiceController@edit")->name("service.edit");
-    Route::patch("service/{service}", "ServiceController@update")->name("service.update");
-    Route::delete("service/{service}", "ServiceController@destroy")->name("service.delete");
+    Route::get("services/create", "ServiceController@create")->name("service.create");
+    Route::post("services/save", "ServiceController@store")->name("service.store");
+    Route::get("services/{service}", "ServiceController@show")->name("service.show");
+    Route::get("services/edit/{service}", "ServiceController@edit")->name("service.edit");
+    Route::put("services/{service}", "ServiceController@update")->name("service.update");
+    Route::delete("services/{service}", "ServiceController@destroy")->name("service.delete");
 
-    Route::post("service/{service}/hire", "ServiceController@hire")->name("service.hire");
-    Route::post("service/{service}/cancel/{user}", "ServiceController@cancel")->name("service.cancel");
+    Route::post("services/{service}/hire", "ServiceController@hire")->name("service.hire");
+    Route::post("services/{service}/cancel/{user}", "ServiceController@cancel")->name("service.cancel");
 
     Route::get("/layout", function(){
         return view("old");

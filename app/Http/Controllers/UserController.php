@@ -86,6 +86,9 @@ class UserController extends Controller
             'name' => 'sometimes|required',
             'email' => 'required',
             'password' => 'sometimes|required',
+        ],[
+            "name.required" => "Nome é obrigatório",
+            "email.required" => "Email é obrigatório"
         ]);
     }
 }

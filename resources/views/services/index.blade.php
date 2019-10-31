@@ -1,24 +1,32 @@
 @extends("layouts.main")
 
+@section("page-title", "Serviços")
+
 @section("content")
-    <div>
-    <tr>
-        <td>Prestador</td>
-        <td>Titulo</td>
-        <td>Descrição</td>
-        <td>Preço</td>
-        <td>Visitar serviço</td>
-    </tr>
-    </div>
-    <div>
-    @foreach($services as $service)
+<table class="table table-striped table-hover">
+    <thead>
         <tr>
-            <td>{{ $service->owner->name }}</td>
-            <td>{{ $service->title }}</td>
-            <td>{{ $service->description }}</td>
-            <td>{{ $service->price }}</td>
-            <td><a href="{{ route('service.show', $service) }}">Serviço</a></td>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Prestador</th>
+            <th style="width: 80px;"></th>
         </tr>
-    @endforeach
-    </div>
+    </thead>
+    <tbody>
+            @foreach($services as $service)
+            <tr>
+                <td>{{ $service->title }}</td>
+                <td>{{ $service->description }}</td>
+                <td>R$ {{ number_format($service->price,2) }}</td>
+                <td>{{ $service->owner->name }}</td>
+                <td>
+                    <a href="{{ route('service.show', $service) }}">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection

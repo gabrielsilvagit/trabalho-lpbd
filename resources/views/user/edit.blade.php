@@ -1,5 +1,6 @@
 @extends("layouts.main")
 
+
 @section("content")
     <form action="{{ route('user.edit.post', $user) }}" method="post">
         @csrf

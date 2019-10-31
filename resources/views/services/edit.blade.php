@@ -1,5 +1,7 @@
 @extends("layouts.main")
 
+@section("page-title", "Serviços")
+
 @section("content")
 
     <form action="{{ route('service.update', $service) }}" method="post">

@@ -7,6 +7,10 @@ header {
     nav {
         height: 100%;
 
+        .container {
+            position: relative;
+        }
+
         ul {
             display: flex;
             width: 100%;
@@ -27,14 +31,19 @@ header {
                         color: #69f;
                     }
                 }
-
-                .dropdown {
-                background-color: red;
-                }
             }
         }
     }
 
+}
+
+#dropdownMenuButton {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    height: $headerh;
+    background: none;
+    border: 0;
 }
 
 .logout {
