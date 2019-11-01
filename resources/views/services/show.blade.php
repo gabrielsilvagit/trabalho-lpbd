@@ -12,7 +12,7 @@
 
         <fieldset {{ Auth::user() == $service->owner ? "" : "disabled=disabled" }}>
             <div class="row">
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail">Titulo</label>
                         <input type="text" class="form-control" name="title" value="{{ old("title", $service->title) }}">
@@ -21,7 +21,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail" >Email</label>
                         <input type="text" class="form-control" name="description" value="{{ old("description", $service->description) }}">
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail" >Preco</label>
                         <input type="text" class="form-control" name="price" value="{{ old("price", $service->price) }}">
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail" >Prestador</label>
                         <input disabled type="text" class="form-control" name="owner" value={{ $service->owner->name }}>
@@ -51,7 +51,7 @@
             </div>
         </fieldset>
         <div class="row">
-            <div class="col-12 text-right">
+            <div class="col-xs-12 text-right">
                 <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary">Voltar</a>
                 @if( Auth::user() == $service->owner)
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>

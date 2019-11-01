@@ -18,6 +18,9 @@
         .btn {
             margin: 15px 0;
         }
+        body {
+            background-color: #f1f4f7;
+        }
     </style>
 </head>
 <body>
@@ -29,7 +32,7 @@
                 <input class="form-control" type="email" placeholder="E-mail" name="email">
                 <label for="password">Senha:</label>
                 <input class="form-control" type="password" placeholder="Senha" name="password">
-                <button class="btn btn-primary" type="submit">Salvar</button>
+                <button class="btn btn-primary" type="submit">Entrar</button>
             </form>
             <a href="{{ route('user.register.create') }}">Não tem uma conta? Clique Aqui</a>
         </div>

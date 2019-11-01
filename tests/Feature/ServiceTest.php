@@ -23,6 +23,35 @@ class ServiceTest extends TestCase
     // }
 
     /** @test */
+    public function service_index_view()
+    {
+        $user = factory(User::class)->make();
+        Auth::login($user);
+        $response = $this->get(route('service.index'));
+        $response->assertViewIs('services.index');
+        // $response->assertViewHas('services');
+    }
+    /** @test */
+    public function service_create_view()
+    {
+        $user = factory(User::class)->make();
+        Auth::login($user);
+        $response = $this->get(route('service.create'));
+        $response->assertViewIs('services.create');
+        // $response->assertViewHas('services');
+    }
+    /** @test */
+    public function service_show_view()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $service = factory(Service::class)->create();
+        $response = $this->get(route('service.show', $service));
+        $response->assertViewIs('services.show');
+        // $response->assertViewHas('services');
+    }
+
+    /** @test */
     public function a_user_can_create_a_service()
     {
         $this->loggedUser = factory(User::class)->create();
@@ -99,7 +128,7 @@ class ServiceTest extends TestCase
             'description' => 'Faço carretas em geral',
             'price' => 'R$ 200,00 por dia',
         ];
-        $response = $this->patch(route('service.update', $service), $newServiceData);
+        $response = $this->put(route('service.update', $service), $newServiceData);
         $this->assertCount(1, Service::all());
         $this->assertDatabaseHas('services', [
             'title' => 'Carreta',

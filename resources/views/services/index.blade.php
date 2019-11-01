@@ -3,6 +3,11 @@
 @section("page-title", "Serviços")
 
 @section("content")
+<div class="row">
+    <div class="col-xs-12 text-left">
+        <a href="{{ route('service.create', Auth::user()) }}" class="btn btn-sm btn-info">Adicionar Serviço</a>
+    </div>
+</div>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -29,4 +34,5 @@
         @endforeach
     </tbody>
 </table>
+{{ $services->links() }}
 @endsection

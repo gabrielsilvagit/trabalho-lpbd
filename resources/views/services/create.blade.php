@@ -6,7 +6,7 @@
     <form action="{{ route('service.store') }}" method="post">
         @csrf
         <div class="row">
-            <div class="col-6">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label for="staticEmail">Titulo</label>
                     <input type="text" class="form-control" name="title" value="{{ old("title") }}">
@@ -15,7 +15,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label for="staticEmail">Descrição</label>
                     <input type="text" class="form-control" name="description" value="{{ old("description") }}">
@@ -24,7 +24,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label for="staticEmail">Preço</label>
                     <input type="text" class="form-control" name="price" value="{{ old("price") }}">

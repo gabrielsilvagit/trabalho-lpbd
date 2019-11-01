@@ -13,6 +13,36 @@ class UserTest extends TestCase
     use refreshDatabase;
 
     /** @test */
+    public function user_create_view()
+    {
+        $response = $this->get(route('user.register.create'));
+        $response->assertViewIs('auth.create');
+    }
+    /** @test */
+    public function user_login_view()
+    {
+        $response = $this->get(route('login'));
+        $response->assertViewIs('auth.login');
+    }
+    /** @test */
+    public function user_index_view()
+    {
+        $user = factory(User::class)->make();
+        Auth::login($user);
+        $response = $this->get(route('user.index'));
+        $response->assertViewIs('user.index');
+        // $response->assertViewHas('services');
+    }
+    /** @test */
+    public function user_show_view()
+    {
+        $user = factory(User::class)->create();
+        Auth::login($user);
+        $response = $this->get(route('show.user', $user));
+        $response->assertViewIs('user.show');
+        // $response->assertViewHas('services');
+    }
+    /** @test */
     public function a_user_can_be_created()
     {
         $user = factory(User::class)->make();
@@ -63,8 +93,7 @@ class UserTest extends TestCase
             'name' => $newUserData->name,
             'email' => $newUserData->email,
         ];
-        $response = $this->patch(route('', $user->id),$userData);
-        $response->assertRedirect(route('show.user', $user));
+        $response = $this->put(route('user.update', $user->id),$userData);
         $this->assertEquals($userData['name'], User::first()->name);
         $this->assertEquals($userData['email'], User::first()->email);
     }

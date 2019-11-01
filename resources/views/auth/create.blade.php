@@ -18,6 +18,9 @@
         .btn {
             margin: 15px 0;
         }
+        body {
+            background-color: #f1f4f7;
+        }
     </style>
 </head>
 <body>

@@ -18,7 +18,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::paginate(15);
         return view('services.index', compact('services'));
     }
 
@@ -40,14 +40,10 @@ class ServiceController extends Controller
      */
     public function store(Request $request, Service $service)
     {
-        try {
-            $request['user_id'] = Auth::user()->id;
-            $data = $this->validateRequest($request);
-            $service->create($data);
-            return redirect()->route("service.show", $service);
-        } catch(Exception $e) {
-            return redirect()->back();
-        }
+        $request['user_id'] = Auth::user()->id;
+        $data = $this->validateRequest($request);
+        $service->create($data);
+        return redirect()->route("service.show", $service);
     }
 
     /**
@@ -62,17 +58,6 @@ class ServiceController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        return view('services.edit',compact('service'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,13 +66,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        try {
-            $data = $this->validateRequest($request);
-            $service->update($data);
-            return redirect()->route("service.show", $service);
-        } catch(Exception $e) {
-            return view('services.edit',compact('service'));
-        }
+        $data = $this->validateRequest($request);
+        $service->update($data);
+        return redirect()->route("service.show", $service);
     }
 
     /**
@@ -121,6 +102,10 @@ class ServiceController extends Controller
             'description' => 'required',
             'price' => 'required',
             'user_id' => 'sometimes|required',
+        ],[
+            "title.required" => "Titulo é obrigatório",
+            "description.required" => "Descrição é obrigatório",
+            "price.required" => "Preço é obrigatório"
         ]);
     }
 }

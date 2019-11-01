@@ -20,7 +20,7 @@ Route::middleware("guest")->group(function(){
 
 
 Route::middleware("auth")->group(function(){
-    Route::get("/", "HomeController@index")->name("home");
+    Route::get("/home", "HomeController@index")->name("home");
     Route::get("users", "UserController@index")->name("user.index");
     Route::get("users/{user}", "UserController@show")->name("show.user");
     Route::get("/users/edit/{user}", "UserController@edit")->name("user.edit");
@@ -39,8 +39,5 @@ Route::middleware("auth")->group(function(){
     Route::post("services/{service}/hire", "ServiceController@hire")->name("service.hire");
     Route::post("services/{service}/cancel/{user}", "ServiceController@cancel")->name("service.cancel");
 
-    Route::get("/layout", function(){
-        return view("old");
-    });
 });
 

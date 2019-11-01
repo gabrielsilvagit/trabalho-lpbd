@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
-
+// @codeCoverageIgnoreStart
 class BroadcastServiceProvider extends ServiceProvider
 {
     /**
@@ -19,3 +19,4 @@ class BroadcastServiceProvider extends ServiceProvider
         require base_path('routes/channels.php');
     }
 }
+// @codeCoverageIgnoreEnd

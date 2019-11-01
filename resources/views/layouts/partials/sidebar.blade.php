@@ -1,7 +1,7 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="{{ asset('img/default.png') }}" class="img-responsive" alt="default">
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
@@ -9,13 +9,13 @@
                         {{ Auth::user()->name }}
                     </a>
                 </div>
-				<div class="profile-usertitle-status">
+            </div>
+				<div class="profile-userbuttons">
                     <form action="{{ route("user.logout") }}" method="POST">
                         @csrf
                         <button class="btn btn-link">Sair</button>
                     </form>
                 </div>
-			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>

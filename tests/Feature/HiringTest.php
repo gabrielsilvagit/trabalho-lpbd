@@ -23,6 +23,7 @@ class HiringTest extends TestCase
             'service_id' => $service->id,
             'user_id' => $user->id,
         ]);
+        
     }
     /** @test */
     public function a_user_can_cancel_a_hire()

@@ -5,6 +5,9 @@ Hiring (Tests\Feature\Hiring)
  [x] A user can hire a service
  [x] A user can cancel a hire
 
+Home (Tests\Feature\Home)
+ [x] Home working
+
 Login (Tests\Feature\Login)
  [x] A user can be log in with correct credential
  [x] A user cant be log in with incorrect email
@@ -12,6 +15,9 @@ Login (Tests\Feature\Login)
  [x] A user can be logout
 
 Service (Tests\Feature\Service)
+ [x] Service index view
+ [x] Service create view
+ [x] Service show view
  [x] A user can create a service
  [x] A user cannot create a service without title
  [x] A user cannot create a service without description
@@ -20,6 +26,10 @@ Service (Tests\Feature\Service)
  [x] A service can be deleted
 
 User (Tests\Feature\User)
+ [x] User create view
+ [x] User login view
+ [x] User index view
+ [x] User show view
  [x] A user can be created
  [x] A name is required
  [x] An email is required

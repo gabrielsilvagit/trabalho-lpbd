@@ -11,9 +11,13 @@
         @include("layouts.partials.page_title")
 
          {{--  CONTENT  --}}
-		<div class="panel panel-container">
-            @yield("content")
-        </div>
+         <div class="row">
+             <div class="col-xs-12">
+                 <div class="panel panel-container">
+                     @yield("content")
+                 </div>
+             </div>
+         </div>
     </div>
 
 @endsection

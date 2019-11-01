@@ -1,6 +1,6 @@
 @extends("layouts.main")
 
-@section("page-title", Auth::user()->name )
+@section("page-title", $user->name )
 
 @section("content")
 
@@ -12,7 +12,7 @@
 
         <fieldset {{ Auth::user() == $user ? "" : "disabled=disabled" }}>
             <div class="row">
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail">Nome</label>
                         <input type="text" class="form-control" name="name" value="{{ old("name", $user->name) }}">
@@ -21,7 +21,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="staticEmail" >Email</label>
                         <input type="text" class="form-control" name="email" value="{{ old("email", $user->email) }}">
@@ -33,7 +33,7 @@
             </div>
         </fieldset>
         <div class="row">
-            <div class="col-12 text-right">
+            <div class="col-xs-12 text-right">
                 <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary">Voltar</a>
                 @if( Auth::user() == $user)
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
@@ -53,23 +53,24 @@
                 <th style="width: 80px;"></th>
             </tr>
         </thead>
-        @foreach ($services as $service)
+        @foreach ($user->service as $service)
         @if( $service->user_id == $user->id )
         <tbody>
             <tr>
-                <th><a href="{{ route('service.show', $service) }}">{{ $service->title }}</a></th>
-                <th>{{ $service->description }}</th>
-                <th>{{ $service->price }}</th>
-                <th>
+                <td><a href="{{ route('service.show', $service) }}">{{ $service->title }}</a></th>
+                <td>{{ $service->description }}</td>
+                <td>R$ {{ number_format($service->price,2) }}</td>
+                <td>
                     @if( Auth::user() == $service->owner)
                     <a href="{{ route('service.delete', $service) }}">
                         <i class="fa fa-trash text-danger"></i>
                     </a>
                     @endif
-                </th>
+                </td>
             </tr>
         </tbody>
         @endif
         @endforeach
     </table>
+    {{ $services->links() }}
 @endsection

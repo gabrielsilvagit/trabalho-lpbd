@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(15);
         return view('user.index', compact('users'));
     }
 
@@ -26,34 +26,21 @@ class UserController extends Controller
     {
         $data = $this->validateRequest($request);
         $data["password"] = Hash::make($request->password);
-        try {
-            $user = User::create($data);
-            return redirect()->route("login");
-        } catch(Exception $e) {
-            return redirect()->route("user.register.create");
-        }
+        $user = User::create($data);
+        return redirect()->route("login");
     }
 
     public function show(User $user)
     {
-        $services = Service::all();
+        $services = Service::where('user_id', '=', $user->id)->paginate(5);
         return view('user.show', compact('user','services'));
-    }
-
-    public function edit(User $user)
-    {
-        return view('user.edit', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
-        try {
-            $data = $this->validateRequest($request);
-            $user->update($data);
-            return redirect(route('show.user', $user));
-        } catch(Exception $e) {
-            return redirect(route('user.edit', $user));
-        }
+        $data = $this->validateRequest($request);
+        $user->update($data);
+        return redirect(route('show.user', $user));
     }
 
     public function destroy(User $user)
@@ -70,14 +57,14 @@ class UserController extends Controller
     {
         $data = $this->validateRequest($request);
         if(!Auth::attempt($data)) {
-            return redirect()->back()->with('msg','Email ou senha invalidos');
+            return redirect('/login');
         }
-        return redirect('/');
+        return redirect('/home');
     }
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/home');
     }
 
     protected function validateRequest($request)

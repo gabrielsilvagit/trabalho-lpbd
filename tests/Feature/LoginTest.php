@@ -14,10 +14,13 @@ class LoginTest extends TestCase
     /** @test */
     public function a_user_can_be_log_in_with_correct_credential()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'password'=> bcrypt('password'),
+        ]);
         $userData = $this->fillUserForm($user);
+        $userData["password"] = 'password' ;
         $response = $this->post(route('login.post'), $userData);
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
     }
     /** @test */
     public function a_user_cant_be_log_in_with_incorrect_email()
@@ -26,7 +29,7 @@ class LoginTest extends TestCase
         $userData = $this->fillUserForm($user);
         $userData["email"] = 'wrong@email.com';
         $response = $this->post(route('login.post'), $userData);
-        $response->assertRedirect('/');
+        $response->assertRedirect('/login');
     }
     /** @test */
     public function a_user_cant_be_log_in_with_incorrect_password()
@@ -35,7 +38,7 @@ class LoginTest extends TestCase
         $userData = $this->fillUserForm($user);
         $userData["password"] = 'wrong_password';
         $response = $this->post(route('login.post'), $userData);
-        $response->assertRedirect('/');
+        $response->assertRedirect('/login');
     }
 
     /** @test */
