@@ -10,3 +10,9 @@ a {
   text-decoration: none !important;
 }
 
+#logout {
+  padding: 0;
+  margin-top: -40px;
+  margin-left: -10px;
+}
+

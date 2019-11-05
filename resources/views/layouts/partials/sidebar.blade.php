@@ -9,13 +9,13 @@
                         {{ Auth::user()->name }}
                     </a>
                 </div>
-            </div>
-				<div class="profile-userbuttons">
+				<div class="profile-usertile-name">
                     <form action="{{ route("user.logout") }}" method="POST">
                         @csrf
-                        <button class="btn btn-link">Sair</button>
+                        <button id="logout" class="btn btn-link">Sair</button>
                     </form>
                 </div>
+            </div>
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
