@@ -43,7 +43,7 @@
                 @error('password')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
             </form>
             <a href="{{ route('login') }}">Já tem uma conta? Clique Aqui</a>
         </div>
