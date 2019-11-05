@@ -75,7 +75,8 @@ class UserController extends Controller
             'password' => 'sometimes|required',
         ],[
             "name.required" => "Nome é obrigatório",
-            "email.required" => "Email é obrigatório"
+            "email.required" => "Email é obrigatório",
+            "password.required" => "Senha é obrigatório"
         ]);
     }
 }

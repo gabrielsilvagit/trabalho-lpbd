@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1572641363">
-  <project timestamp="1572641363">
+<coverage generated="1572975301">
+  <project timestamp="1572975301">
     <package name="App\Console">
       <file name="C:\Gabriel\estudos\trabalho\app\Console\Kernel.php">
         <class name="App\Console\Kernel" namespace="App\Console">
@@ -244,13 +244,13 @@
       </file>
       <file name="C:\Gabriel\estudos\trabalho\app\User.php">
         <class name="App\User" namespace="App">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
         </class>
-        <line num="40" type="method" name="service" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="42" type="stmt" count="1"/>
-        <metrics loc="44" ncloc="29" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+        <line num="40" type="method" name="service" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="44" ncloc="29" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="21" loc="824" ncloc="533" classes="11" methods="34" coveredmethods="34" conditionals="0" coveredconditionals="0" statements="76" coveredstatements="76" elements="110" coveredelements="110"/>
+    <metrics files="21" loc="824" ncloc="533" classes="11" methods="34" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="76" coveredstatements="75" elements="110" coveredelements="108"/>
   </project>
 </coverage>

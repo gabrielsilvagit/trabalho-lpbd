@@ -30,10 +30,19 @@
                 @csrf
                 <label for="name">Nome:</label>
                 <input class="form-control" type="text" placeholder="Nome" name="name">
+                @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <label for="email">Email:</label>
                 <input class="form-control" type="email" placeholder="E-mail" name="email">
+                @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <label for="password">Senha:</label>
                 <input class="form-control" type="password" placeholder="Senha" name="password">
+                @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
             <a href="{{ route('login') }}">Já tem uma conta? Clique Aqui</a>

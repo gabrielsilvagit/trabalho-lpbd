@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="/"><span>i</span>Service</a>
+                <a class="navbar-brand" href="{{ route('home') }}"><span>i</span>Service</a>
 
 			</div>
 		</div><!-- /.container-fluid -->

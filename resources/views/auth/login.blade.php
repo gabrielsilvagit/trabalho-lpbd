@@ -30,8 +30,14 @@
                 @csrf
                 <label for="email">Email:</label>
                 <input class="form-control" type="email" placeholder="E-mail" name="email">
+                @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <label for="password">Senha:</label>
                 <input class="form-control" type="password" placeholder="Senha" name="password">
+                @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <button class="btn btn-primary" type="submit">Entrar</button>
             </form>
             <a href="{{ route('user.register.create') }}">Não tem uma conta? Clique Aqui</a>
