@@ -26,7 +26,7 @@
 		</form>  --}}
 		<ul class="nav menu">
 			<li class="{{ (strpos(url()->current(), "/services") == false && strpos(url()->current(), "/users") == false) ? 'active' :""  }}">
-                <a href="/">
+                <a href="/home">
                     <em class="fa fa-home">&nbsp;</em>
                     Home
                 </a>

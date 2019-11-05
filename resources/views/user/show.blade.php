@@ -53,7 +53,7 @@
                 <th style="width: 80px;"></th>
             </tr>
         </thead>
-        @foreach ($user->service as $service)
+        @foreach ($services as $service)
         @if( $service->user_id == $user->id )
         <tbody>
             <tr>
@@ -73,4 +73,23 @@
         @endforeach
     </table>
     {{ $services->links() }}
+    <h1>Clientes</h1>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Serviço</th>
+            </tr>
+        </thead>
+        @foreach($services as $service)
+            @foreach($service->user as $user)
+                <tbody>
+                    <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $service->title }}</td>
+                    </tr>
+                </tbody>
+            @endforeach
+        @endforeach
+    </table>
 @endsection

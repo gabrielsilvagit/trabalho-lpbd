@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="staticEmail" >Email</label>
+                        <label for="staticEmail" >Descrição</label>
                         <input type="text" class="form-control" name="description" value="{{ old("description", $service->description) }}">
                         @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
