@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Askedio\SoftCascade\Providers\GenericServiceProvider::class,
 
         /*
          * Application Service Providers...

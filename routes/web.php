@@ -25,7 +25,7 @@ Route::middleware("auth")->group(function(){
     Route::get("users/{user}", "UserController@show")->name("show.user");
     Route::get("/users/edit/{user}", "UserController@edit")->name("user.edit");
     Route::put('users/{user}','UserController@update')->name("user.update");
-    Route::delete('users/{user}','UserController@destroy')->name("user.delete");
+    Route::delete('users/{user}/delete','UserController@destroy')->name("user.delete");
     Route::post("/logout", "UserController@logout")->name("user.logout");
 
     Route::get("services", "ServiceController@index")->name("service.index");
@@ -34,7 +34,7 @@ Route::middleware("auth")->group(function(){
     Route::get("services/{service}", "ServiceController@show")->name("service.show");
     Route::get("services/edit/{service}", "ServiceController@edit")->name("service.edit");
     Route::put("services/{service}", "ServiceController@update")->name("service.update");
-    Route::delete("services/{service}", "ServiceController@destroy")->name("service.delete");
+    Route::delete("services/{service}/delete", "ServiceController@destroy")->name("service.delete");
 
     Route::post("services/{service}/hire", "ServiceController@hire")->name("service.hire");
     Route::post("services/{service}/cancel/{user}", "ServiceController@cancel")->name("service.cancel");

@@ -15,10 +15,9 @@ class CreateHiringsTable extends Migration
     {
         Schema::create('service_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('service_id');
-            $table->string('user_id');
+            $table->bigInteger('service_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
-
             $table->foreign('service_id')->references('id')->on('services');
             $table->foreign('user_id')->references('id')->on('users');
         });

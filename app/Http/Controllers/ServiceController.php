@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Hiring;
 use App\Service;
+use App\Traits\ShowMessages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
+    use ShowMessages;
     /**
      * Display a listing of the resource.
      *
@@ -43,6 +45,7 @@ class ServiceController extends Controller
         $request['user_id'] = Auth::user()->id;
         $data = $this->validateRequest($request);
         $service->create($data);
+        $this->showMessage("Serviço salvo com sucesso!");
         return redirect()->route("service.show", $service);
     }
 
@@ -68,6 +71,7 @@ class ServiceController extends Controller
     {
         $data = $this->validateRequest($request);
         $service->update($data);
+        $this->showMessage("Serviço salvo com sucesso!");
         return redirect()->route("service.show", $service);
     }
 
@@ -80,6 +84,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
+        $this->showMessage("Serviço excluído com sucesso!");
         return redirect(route('show.user', $service->owner));
     }
 
@@ -87,11 +92,13 @@ class ServiceController extends Controller
     {
         $user = Auth::user();
         $service->user()->attach($user);
+        $this->showMessage("Serviço contratado com sucesso!");
         return redirect(route('service.show', $service));
     }
     public function cancel(Service $service, User $user)
     {
         $service->user()->detach($user);
+        $this->showMessage("Serviço cancelado com sucesso!");
         return redirect(route('service.show', $service));
     }
 

@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Service;
+use App\Traits\ShowMessages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    use ShowMessages;
+
     public function index()
     {
         $users = User::paginate(15);
@@ -27,6 +31,9 @@ class UserController extends Controller
         $data = $this->validateRequest($request);
         $data["password"] = Hash::make($request->password);
         $user = User::create($data);
+
+        $this->showMessage("Usuário salvo com sucesso!");
+
         return redirect()->route("login");
     }
 
@@ -40,13 +47,26 @@ class UserController extends Controller
     {
         $data = $this->validateRequest($request);
         $user->update($data);
+
+        $this->showMessage("Usuário salvo com sucesso!");
+
         return redirect(route('show.user', $user));
     }
 
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect(route('login'));
+        DB::beginTransaction();
+        try {
+            Service::where("user_id", "=", $user->id)->delete();
+            $user->delete();
+            $this->showMessage("Usúario excluído com sucesso!");
+            DB::commit();
+            return redirect(route('login'));
+        } catch(Exception $e) {
+            $this->showMessage("Erro ao excluir usúario!", "error");
+            return redirect()->back();
+            DB::rollBack();
+        }
     }
 
     public function loginIndex()
