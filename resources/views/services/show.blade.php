@@ -70,16 +70,16 @@
             @endif
         </div>
     </div>
-
+</form>
 
     @if ( Auth::user() != $service->owner)
         @if( $service->user->contains(Auth::user()) )
-            <form action="{{ route('service.cancel', [$service, Auth::user()]) }}" method="post">
+            <form action="{{ route('service.cancel', [$service, Auth::user()]) }}" method="POST">
                 @csrf
                 <button class="btn btn-danger" type="submit">Cancelar</button>
             </form>
         @else
-            <form action="{{ route('service.hire', $service) }}" method="post">
+            <form action="{{ route('service.hire', $service) }}" method="POST">
                 @csrf
                 <button class="btn btn-primary" type="submit">Contratar</button>
             </form>

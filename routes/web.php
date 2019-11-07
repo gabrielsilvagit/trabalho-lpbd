@@ -33,7 +33,7 @@ Route::middleware("auth")->group(function(){
     Route::post("services/save", "ServiceController@store")->name("service.store");
     Route::get("services/{service}", "ServiceController@show")->name("service.show");
     Route::get("services/edit/{service}", "ServiceController@edit")->name("service.edit");
-    Route::put("services/{service}", "ServiceController@update")->name("service.update");
+    Route::put("services/{service}/save", "ServiceController@update")->name("service.update");
     Route::delete("services/{service}/delete", "ServiceController@destroy")->name("service.delete");
 
     Route::post("services/{service}/hire", "ServiceController@hire")->name("service.hire");
