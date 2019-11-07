@@ -24,6 +24,7 @@
     </style>
 </head>
 <body>
+        {{ phpinfo() }}}
     <div class="container">
         <div class="box shadow-sm p-3 mb-5 bg-white rounded">
             <form action="{{ route('login.post') }}" method="post">
