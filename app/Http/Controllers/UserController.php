@@ -39,8 +39,13 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $services = Service::where('user_id', '=', $user->id)->paginate(5);
-        return view('user.show', compact('user','services'));
+        $services = Service::where('user_id', '=', $user->id)->paginate(50, ["*"], "services");
+        $customers = User::join("service_user as p", "p.user_id", "=", "users.id")
+            ->join("services as s", "s.id","=","p.service_id")
+            ->where("s.user_id", $user->id)
+            ->select("users.name as u_name","users.id as u_id", "s.title as s_title", "s.id as s_id")
+            ->whereNull("s.deleted_at")->paginate(50, ["*"], "customers");
+        return view('user.show', compact('user','services', 'customers'));
     }
 
     public function update(User $user, Request $request)

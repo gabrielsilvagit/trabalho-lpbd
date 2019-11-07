@@ -91,24 +91,27 @@
             <tr>
                 <th>Nome</th>
                 <th style="width: 80px;"></th>
+                <th style="width: 80px;"></th>
             </tr>
         </thead>
-        @foreach ($service->user as $user)
         <tbody>
+            @foreach ($customers as $user)
             <tr>
-                <td>{{$user->name}}</td>
+                <td><a href="{{ route('show.user', $user) }}">{{ $user->name }}</a></td>
                 <td>
                     @if(Auth::user() == $service->owner)
-                        <form action="{{ route('service.cancel', [$service, $user]) }}" method="post">
-                            @csrf
-                            <button class="btn btn-danger" type="submit">Cancelar</button>
-                        </form>
+                    <form action="{{ route('service.cancel', [$service, $user]) }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Cancelar</button>
+                    </form>
                     @endif
                 </td>
+                <td><a href="{{ route('show.user', $user) }}"><i class="fa fa-eye"></i></a></td>
             </tr>
+            @endforeach
         </tbody>
-        @endforeach
     </table>
+    {{ $customers->links() }}
 @endsection
 
 @push("scripts")

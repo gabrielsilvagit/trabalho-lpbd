@@ -92,20 +92,23 @@
         <thead>
             <tr>
                 <th>Nome</th>
+                <th style="width: 80px;"></th>
                 <th>Serviço</th>
+                <th style="width: 80px;"></th>
             </tr>
         </thead>
-        @foreach($services as $service)
-            @foreach($service->user as $user)
+            @foreach($customers as $user)
                 <tbody>
                     <tr>
-                    <td><a href="{{ route('show.user', $user) }}">{{ $user->name }}</a></td>
-                    <td><a href="{{ route('service.show', $service) }}">{{ $service->title }}</a></td>
+                    <td><a href="{{ route('show.user', $user->u_id) }}">{{ $user->u_name }}</a></td>
+                    <td><a href="{{ route('show.user', $user->u_id) }}"><i class="fa fa-eye"></i></a></td>
+                    <td><a href="{{ route('service.show', $user->s_id) }}">{{ $user->s_title }}</a></td>
+                    <td><a href="{{ route('service.show', $user->s_id) }}"><i class="fa fa-eye"></i></td>
                     </tr>
                 </tbody>
             @endforeach
-        @endforeach
     </table>
+    {{ $customers->links() }}
 @endsection
 
 @push("scripts")

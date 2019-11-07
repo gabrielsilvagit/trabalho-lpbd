@@ -49,24 +49,17 @@ class ServiceController extends Controller
         return redirect()->route("service.show", $service);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function show(Service $service)
     {
-        return view('services.show',compact('service'));
+        $customers = User::join("service_user as p", "p.user_id", "=", "users.id")
+            ->join("services as s", "s.id","=","p.service_id")
+            ->where("p.service_id", $service->id)
+            ->select("users.*")
+            ->whereNull("s.deleted_at")->paginate(50, ["*"], "customers");
+        return view('services.show',compact('service','customers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Service $service)
     {
         $data = $this->validateRequest($request);

@@ -23,9 +23,9 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search">
 			</div>
-		</form>  --}}
+        </form>  --}}
 		<ul class="nav menu">
-                <li class="{{  strpos(url()->current(), "/home") ? 'active' :""  }}">
+                <li class="{{  (url()->current() === route("home")) ? 'active' :""  }}">
                 <a href="{{ route("home")  }}">
                     <em class="fa fa-home">&nbsp;</em>
                     Home
