@@ -82,14 +82,14 @@ class UserController extends Controller
     {
         $data = $this->validateRequest($request);
         if(!Auth::attempt($data)) {
-            return redirect('/login');
+            return redirect()->route('login');
         }
-        return redirect('/home');
+        return redirect()->route('home');
     }
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/home');
+        return redirect()->route('login');
     }
 
     protected function validateRequest($request)

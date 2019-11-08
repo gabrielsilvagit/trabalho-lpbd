@@ -16,7 +16,7 @@ class HomeTest extends TestCase
         $this->withoutExceptionHandling();
         $user = factory(User::class)->make();
         Auth::login($user);
-        $response = $this->get('/home');
+        $response = $this->get('/');
         $response->assertViewIs('home.welcome');
         $response->assertViewHas('user');
     }

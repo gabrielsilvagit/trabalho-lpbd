@@ -20,7 +20,7 @@ class LoginTest extends TestCase
         $userData = $this->fillUserForm($user);
         $userData["password"] = 'password' ;
         $response = $this->post(route('login.post'), $userData);
-        $response->assertRedirect('/home');
+        $response->assertRedirect('/');
     }
     /** @test */
     public function a_user_cant_be_log_in_with_incorrect_email()
