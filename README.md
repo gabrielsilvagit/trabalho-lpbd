@@ -1,9 +1,13 @@
 # trabalho-lpbd
 
 Esse projeto foi realizado a 5 meses para um trabalho na faculdade, a documentação foi feita para o trabalho.
+
 Hoje tenho mais conhecimento e experiência, acredito que meu código esteja bem melhor.
+
 Qualquer dúvida, me chame no WhatsApp: (19) 983-168-060.
+
 Obrigado desde já! 
+
 Enjoy.
 
 ------------------------------------------------------------------------------------------------------------------------
